@@ -1,6 +1,9 @@
 # Dice package
 A GoLang package that allows complete management, autonomous or manual, of the use of dice for games of all kinds.
 
+## Special Thanks:
+	- @Vano2903 in the role of `Alpha-Tester`
+
 ## Installation
 First, make sure you have [GoLang](https://golang.org/doc/install) installed on your machine.<br>
 Proceed by downloading the package with the `go get https://github.com/MoraGames/dice` command.<br>
