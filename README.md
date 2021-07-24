@@ -2,7 +2,7 @@
 A GoLang package that allows complete management, autonomous or manual, of the use of dice for games of all kinds.
 
 ### Special Thanks:
-	- @Vano2903 in the role of `Alpha-Tester`
+- **@Vano2903** in the role of `Alpha-Tester`
 
 ## Installation
 First, make sure you have [GoLang](https://golang.org/doc/install) installed on your machine.<br>
