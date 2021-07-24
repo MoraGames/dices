@@ -1,7 +1,7 @@
 # Dice package
 A GoLang package that allows complete management, autonomous or manual, of the use of dice for games of all kinds.
 
-## Special Thanks:
+### Special Thanks:
 	- @Vano2903 in the role of `Alpha-Tester`
 
 ## Installation
