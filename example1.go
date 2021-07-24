@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/MoraGames/dice"
+	//"github.com/MoraGames/dice"
 )
 
 func main() {
