@@ -2,11 +2,11 @@
 A GoLang package that allows complete management, autonomous or manual, of the use of dice for games of all kinds.
 
 ## Installation
-First, make sure you have [GoLang](https://golang.org/doc/install) installed on your machine.
-Proceed by downloading the package with the `go get https://github.com/MoraGames/dice` command
+First, make sure you have [GoLang](https://golang.org/doc/install) installed on your machine.<br>
+Proceed by downloading the package with the `go get https://github.com/MoraGames/dice` command.<br>
 
 ## Example
-1: Roll a standard 6-sides dice:
+**1. Roll a standard 6-sides dice:**
 ```Go
 package main
 
