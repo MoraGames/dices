@@ -3,29 +3,59 @@ package dice
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 	"time"
 )
+
+func Throw(dices []dice, options options) ([]string, error) {
+	var results []string
+	for i, dice := range dices {
+		result, _ := dice.Throw(1)
+		results = append(results, result...)
+		if options.operation != nil && options.frequency.contains(strconv.Itoa(i+1)) == true {
+			realResult, err := options.operation(results...)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results[:len(results)-1], realResult)
+		}
+	}
+	return results, nil
+}
+
+const minSides int = 2
 
 type dice struct {
 	sidesNumber int
 	sidesValue  []string
 }
 
-func NewDice(sidesNumber int, sidesValue []string) (*dice, error) {
-	if len(sidesValue) > sidesNumber {
-		return nil, fmt.Errorf("The length of sidesValue (%d) must be less or equal than the sidesNumber (%d).", len(sidesValue), sidesNumber)
+func NewDice(sidesNumber int) (*dice, error) {
+	if sidesNumber < minSides {
+		return nil, fmt.Errorf("The number of faces (%d) must be greater than or equal to %d.", sidesNumber, minSides)
+	}
+	var sidesValue []string
+	for s := 1; s <= sidesNumber; s++ {
+		sidesValue = append(sidesValue, strconv.Itoa(s))
 	}
 	return &dice{sidesNumber, sidesValue}, nil
 }
 
-func (d *dice) Throw(rollTimes int) ([]string, error) {
+func NewCustomDice(sidesValue []string) (*dice, error) {
+	if len(sidesValue) < minSides {
+		return nil, fmt.Errorf("The number of faces (%d) must be greater than or equal to %d.", len(sidesValue), minSides)
+	}
+	return &dice{len(sidesValue), sidesValue}, nil
+}
+
+func (d dice) Throw(rollTimes int) ([]string, error) {
 	if rollTimes < 1 {
 		return nil, fmt.Errorf("The number of dice rolls (%d) must be greater than or equal to 1.", rollTimes)
 	}
 	random := rand.New(rand.NewSource(time.Now().UnixNano()))
-	var result []string
+	var results []string
 	for t := 0; t < rollTimes; t++ {
-		result = append(result, d.sidesValue[random.Intn(d.sidesNumber)])
+		results = append(results, d.sidesValue[random.Intn(d.sidesNumber)])
 	}
-	return result, nil
+	return results, nil
 }
