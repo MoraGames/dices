@@ -70,3 +70,5 @@ func (d dice) Throw(rollTimes int) ([]string, error) {
 	}
 	return results, nil
 }
+
+// Ciao
