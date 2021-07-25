@@ -48,6 +48,10 @@ func NewCustomDice(sidesValue []string) (*dice, error) {
 	return &dice{len(sidesValue), sidesValue}, nil
 }
 
+func NewSliceOfDice(dices ...dice) []dice {
+	return dices
+}
+
 func (d dice) Throw(rollTimes int) ([]string, error) {
 	if rollTimes < 1 {
 		return nil, fmt.Errorf("The number of dice rolls (%d) must be greater than or equal to 1.", rollTimes)

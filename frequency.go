@@ -22,6 +22,10 @@ func (frq frequency) contains(element string) bool {
 func NewFrequency(pattern string) (frequency, error) {
 	var frq frequency
 
+	if pattern == "" {
+		return nil, nil
+	}
+
 	elements := strings.Split(pattern, ",")
 	for _, element := range elements {
 		if matched, _ := regexp.MatchString(`^[0-9]+$`, element); matched == true {
