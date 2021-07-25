@@ -6,7 +6,7 @@ First, make sure you have [GoLang 1.16](https://golang.org/doc/install) installe
 Proceed by downloading the package with the `go get -u github.com/MoraGames/dice` command.<br>
 
 ## Examples
-**1. Roll a standard 6-sides dice:** [GoPlayground]()
+**1. Roll a standard 6-sides dice:** [GoPlayground](https://play.golang.org/p/JZ5slbKhCtI)
 ```Go
 package main
 
@@ -34,7 +34,7 @@ func main ()() {
 	fmt.Println("The result of rolling the dice d1 is:", result)
 }
 ```
-**2. Roll a custom dice:** [GoPlayground]()
+**2. Roll a custom dice:** [GoPlayground](https://play.golang.org/p/LYxP8DfyVdu)
 ```Go
 package main
 
