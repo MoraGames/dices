@@ -45,14 +45,14 @@ func NewDice(sidesNumber int) (dice, error) {
 	for s := 1; s <= sidesNumber; s++ {
 		sidesValue = append(sidesValue, strconv.Itoa(s))
 	}
-	return &dice{sidesNumber, sidesValue}, nil
+	return dice{sidesNumber, sidesValue}, nil
 }
 
 func NewCustomDice(sidesValue []string) (dice, error) {
 	if len(sidesValue) < minSides {
 		return nil, fmt.Errorf("The number of faces (%d) must be greater than or equal to %d.", len(sidesValue), minSides)
 	}
-	return &dice{len(sidesValue), sidesValue}, nil
+	return dice{len(sidesValue), sidesValue}, nil
 }
 
 func NewSliceOfDice(dices ...dice) []dice {
