@@ -7,20 +7,27 @@ import (
 	"time"
 )
 
-func Throw(dices []dice, options options) ([]string, error) {
-	var results []string
-	for i, dice := range dices {
-		result, _ := dice.Throw(1)
-		results = append(results, result...)
-		if options.operation != nil && options.frequency.contains(strconv.Itoa(i+1)) == true {
-			realResult, err := options.operation(results...)
-			if err != nil {
-				return nil, err
-			}
-			results = append(results[:len(results)-1], realResult)
-		}
+func Throw(dices []dice, options options, rollTimes int) ([][]string, error) {
+	var totalResults [][]string
+	if rollTimes < 1 {
+		return nil, fmt.Errorf("The number of dices rolls (%d) must be greater than or equal to 1.", rollTimes)
 	}
-	return results, nil
+	for t := 0; t < rollTimes; t++ {
+		var results []string
+		for i, dice := range dices {
+			result, _ := dice.Throw(1)
+			results = append(results, result...)
+			if options.operation != nil && options.frequency.contains(strconv.Itoa(i+1)) == true {
+				realResult, err := options.operation(results...)
+				if err != nil {
+					return nil, err
+				}
+				results = append(results[:len(results)-1], realResult)
+			}
+		}
+		totalResults = append(totalResults, results)
+	}
+	return totalResults, nil
 }
 
 const minSides int = 2

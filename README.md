@@ -2,8 +2,8 @@
 A GoLang package that allows complete management, autonomous or manual, of the use of dice for games of all kinds.
 
 ## Installation
-First, make sure you have [GoLang](https://golang.org/doc/install) installed on your machine.<br>
-Proceed by downloading the package with the `go get https://github.com/MoraGames/dice` command.<br>
+First, make sure you have [GoLang 1.16](https://golang.org/doc/install) installed on your machine.<br>
+Proceed by downloading the package with the `go get -u github.com/MoraGames/dice` command.<br>
 
 ## Examples
 **1. Roll a standard 6-sides dice:** [GoPlayground]()
@@ -26,7 +26,7 @@ func main ()() {
 	//d1 is a 6-sided dice with faces valued ["1", "2", "3", "4", "5", "6"].
 
 	//Roll the dice n-times and print the result
-	rollTimes = 1
+	rollTimes := 1
 	result, err := d1.Throw(rollTimes)
 	if err != nil {
 		log.Panic(err)
@@ -102,12 +102,13 @@ func main ()() {
 		log.Panic(err)
 	}
 
-	//Roll the dice
-	result, err := dice.Throw(dices, options)
+	//Roll the dices n-times and print the result
+	rollTimes := 1
+	result, err := dice.Throw(dices, options, rollTimes)
 	if err != nil {
 		log.Panic(err)
 	}
-	fmt.Println("The result of the roll of the dice is:", result)
+	fmt.Println("The result of the roll of the dices is:", result)
 }
 ```
 **4. roll more dice with special rules:** [GoPlayground]()
@@ -166,12 +167,13 @@ func main ()() {
 		log.Panic(err)
 	}
 
-	//Roll the dice
-	result, err := dice.Throw(dices, options)
+	//Roll the dices n-times and print the result
+	rollTimes := 1
+	result, err := dice.Throw(dices, options, rollTimes)
 	if err != nil {
 		log.Panic(err)
 	}
-	fmt.Println("The result of the roll of the dice is:", result)
+	fmt.Println("The result of the roll of the dices is:", result)
 }
 ```
 ## Functions
