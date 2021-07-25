@@ -39,7 +39,7 @@ type dice struct {
 
 func NewDice(sidesNumber int) (dice, error) {
 	if sidesNumber < minSides {
-		return nil, fmt.Errorf("The number of faces (%d) must be greater than or equal to %d.", sidesNumber, minSides)
+		return dice{}, fmt.Errorf("The number of faces (%d) must be greater than or equal to %d.", sidesNumber, minSides)
 	}
 	var sidesValue []string
 	for s := 1; s <= sidesNumber; s++ {
@@ -50,7 +50,7 @@ func NewDice(sidesNumber int) (dice, error) {
 
 func NewCustomDice(sidesValue []string) (dice, error) {
 	if len(sidesValue) < minSides {
-		return nil, fmt.Errorf("The number of faces (%d) must be greater than or equal to %d.", len(sidesValue), minSides)
+		return dice{}, fmt.Errorf("The number of faces (%d) must be greater than or equal to %d.", len(sidesValue), minSides)
 	}
 	return dice{len(sidesValue), sidesValue}, nil
 }
