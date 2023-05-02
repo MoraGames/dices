@@ -9,31 +9,31 @@ import (
 
 const minSides int = 2
 
-type dice struct {
+type Dice struct {
 	rand *rand.Rand
 
 	sidesNumber int
 	sidesValue  []string
 }
 
-func NewDice(sidesNumber int) (dice, error) {
+func NewDice(sidesNumber int) (*Dice, error) {
 	if sidesNumber < minSides {
-		return dice{}, fmt.Errorf("The number of faces (%d) must be greater than or equal to %d.", sidesNumber, minSides)
+		return nil, fmt.Errorf("the number of faces (%d) must be greater than or equal to %d", sidesNumber, minSides)
 	}
 	var sidesValue []string
 	for s := 1; s <= sidesNumber; s++ {
 		sidesValue = append(sidesValue, strconv.Itoa(s))
 	}
-	return dice{rand.New(rand.NewSource(time.Now().UnixNano())), sidesNumber, sidesValue}, nil
+	return &Dice{rand.New(rand.NewSource(time.Now().UnixNano())), sidesNumber, sidesValue}, nil
 }
 
-func NewCustomDice(sidesValue []string) (dice, error) {
+func NewCustomDice(sidesValue []string) (*Dice, error) {
 	if len(sidesValue) < minSides {
-		return dice{}, fmt.Errorf("The number of faces (%d) must be greater than or equal to %d.", len(sidesValue), minSides)
+		return nil, fmt.Errorf("the number of faces (%d) must be greater than or equal to %d", len(sidesValue), minSides)
 	}
-	return dice{rand.New(rand.NewSource(time.Now().UnixNano())), len(sidesValue), sidesValue}, nil
+	return &Dice{rand.New(rand.NewSource(time.Now().UnixNano())), len(sidesValue), sidesValue}, nil
 }
 
-func (d dice) Throw() string {
+func (d *Dice) Throw() string {
 	return d.sidesValue[d.rand.Intn(d.sidesNumber)]
 }
