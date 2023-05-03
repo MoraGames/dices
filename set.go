@@ -5,10 +5,10 @@ import "fmt"
 const minDices int = 1
 
 type Set struct {
-	dices []Dice
+	dices []*Dice
 }
 
-func NewSet(dices ...Dice) (*Set, error) {
+func NewSet(dices ...*Dice) (*Set, error) {
 	if len(dices) == 0 {
 		return nil, fmt.Errorf("the number of dices (%d) must be greater than or equal to %d", len(dices), minDices)
 	}

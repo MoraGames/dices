@@ -1,3 +1,11 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+
+[![GoDoc](https://godoc.org/github.com/MoraGames/dice?status.svg)](https://pkg.go.dev/github.com/MoraGames/dice)
+[![Go Report Card](https://goreportcard.com/badge/github.com/MoraGames/dice)](https://goreportcard.com/report/github.com/MoraGames/dice)
+
 # Dice package
 A GoLang package that allows complete management, autonomous or manual, of the use of dice for games of all kinds.
 
@@ -27,9 +35,6 @@ func main() {
 
 	//Roll the dice and print the result
 	result  := d1.Throw()
-	if err != nil {
-		log.Panic(err)
-	}
 	fmt.Println("The result of rolling the dice d1 is:", result)
 }
 ```
@@ -43,7 +48,7 @@ import (
 	"github.com/MoraGames/dice"
 )
 
-func main ()() {
+func main() {
 	//Create a custom n-sides dice and their respective values
 	sidesValue := []string{"Apple", "Banana", "Cherry", "Dates", "Elderberry"}
 	d2, err := dice.NewCustomDice(sidesValue)
@@ -54,9 +59,52 @@ func main ()() {
 	
 	//Roll the dice and print the result
 	result := d2.Throw()
+	fmt.Println("The result of rolling the dice d2 is:", result)
+}
+```
+**3. Roll a set of dices:** [GoPlayground](https://play.golang.org/p/LYxP8DfyVdu)
+```Go
+package main
+
+import (
+	"fmt"
+	"log"
+	"github.com/MoraGames/dice"
+)
+
+func main() {
+	//Create a standard n-sides dice
+	sidesNumber := 6
+	d3a, err := dice.NewDice(sidesNumber)
 	if err != nil {
 		log.Panic(err)
 	}
-	fmt.Println("The result of rolling the dice d2 is:", result)
+	//d3a is a 6-sided dice with faces valued ["1", "2", "3", "4", "5", "6"].
+	
+	//Create a custom n-sides dice and their respective values
+	sidesValue1 := []string{"Apple", "Banana", "Cherry", "Dates", "Elderberry"}
+	d3b, err := dice.NewCustomDice(sidesValue1)
+	if err != nil {
+		log.Panic(err)
+	}
+	//d3b is a 5-sided dice with faces valued ["Apple", "Banana", "Cherry", "Dates", "Elderberry"]
+
+	//Create a custom n-sides dice and their respective values
+	sidesValue2 := []string{"-1", "0", "1"}
+	d3c, err := dice.NewCustomDice(sidesValue2)
+	if err != nil {
+		log.Panic(err)
+	}
+	//d3b is a 5-sided dice with faces valued ["Apple", "Banana", "Cherry", "Dates", "Elderberry"]
+	
+	//Create a custom set of n-dices
+	s1, err := dice.NewSet(d3a, d3b, d3c)
+	if err != nil {
+		log.Panic(err)
+	}
+	
+	//Roll all the dices in the set
+	result := s1.Throw()
+	fmt.Println("The result of rolling the set s1 is:", result)
 }
 ```
