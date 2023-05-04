@@ -27,7 +27,7 @@ func NewDice(sidesNumber int) (*Dice, error) {
 	return &Dice{rand.New(rand.NewSource(time.Now().UnixNano())), sidesNumber, sidesValue}, nil
 }
 
-func NewCustomDice(sidesValue []string) (*Dice, error) {
+func NewCustomDice(sidesValue ...string) (*Dice, error) {
 	if len(sidesValue) < minSides {
 		return nil, fmt.Errorf("the number of faces (%d) must be greater than or equal to %d", len(sidesValue), minSides)
 	}
