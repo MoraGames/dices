@@ -3,8 +3,8 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 
-[![GoDoc](https://godoc.org/github.com/MoraGames/dice?status.svg)](https://pkg.go.dev/github.com/MoraGames/dice)
-[![Go Report Card](https://goreportcard.com/badge/github.com/MoraGames/dice)](https://goreportcard.com/report/github.com/MoraGames/dice)
+[![GoDoc][godoc-shield]][godoc-url]
+[![Go Report Card][gocard-shield]][gocard-url]
 
 # Dice package
 A GoLang package that allows complete management, autonomous or manual, of the use of dice for games of all kinds.
@@ -108,3 +108,18 @@ func main() {
 	fmt.Println("The result of rolling the set s1 is:", result)
 }
 ```
+
+[contributors-shield]: https://img.shields.io/github/contributors/MoraGames/dice.svg?style=for-the-badge
+[contributors-url]: https://github.com/MoraGames/dice/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/MoraGames/dice.svg?style=for-the-badge
+[forks-url]: https://github.com/MoraGames/dice/network/members
+[stars-shield]: https://img.shields.io/github/stars/MoraGames/dice.svg?style=for-the-badge
+[stars-url]: https://github.com/MoraGames/dice/stargazers
+[issues-shield]: https://img.shields.io/github/issues/MoraGames/dice.svg?style=for-the-badge
+[issues-url]: https://github.com/MoraGames/dice/issues
+[license-shield]: https://img.shields.io/github/license/MoraGames/dice.svg?style=for-the-badge
+[license-url]: https://github.com/MoraGames/dice/blob/master/LICENSE.md
+[godoc-shield]: https://godoc.org/github.com/MoraGames/dice?status.svg
+[godoc-url]: https://pkg.go.dev/github.com/MoraGames/dice
+[gocard-shield]: https://goreportcard.com/badge/github.com/MoraGames/dice
+[gocard-url]: https://goreportcard.com/report/github.com/MoraGames/dice
