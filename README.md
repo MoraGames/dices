@@ -14,13 +14,14 @@ First, make sure you have [GoLang](https://golang.org/doc/install) installed on 
 Proceed by downloading the package with the `go get -u github.com/MoraGames/dice` command.<br>
 
 ## Examples
-**1. Roll a standard 6-sides dice:** [GoPlayground](https://play.golang.org/p/JZ5slbKhCtI)
+**1. Roll a standard 6-sides dice:** [GoPlayground](https://go.dev/play/p/uh8fWjBEAn_0)
 ```Go
 package main
 
 import (
 	"fmt"
 	"log"
+	
 	"github.com/MoraGames/dice"
 )
 
@@ -38,13 +39,14 @@ func main() {
 	fmt.Println("The result of rolling the dice d1 is:", result)
 }
 ```
-**2. Roll a custom dice:** [GoPlayground](https://play.golang.org/p/LYxP8DfyVdu)
+**2. Roll a custom dice:** [GoPlayground](https://go.dev/play/p/hQuIIR0JxEe)
 ```Go
 package main
 
 import (
 	"fmt"
 	"log"
+	
 	"github.com/MoraGames/dice"
 )
 
@@ -62,13 +64,14 @@ func main() {
 	fmt.Println("The result of rolling the dice d2 is:", result)
 }
 ```
-**3. Roll a set of dices:** [GoPlayground](https://play.golang.org/p/LYxP8DfyVdu)
+**3. Roll a set of dices:** [GoPlayground](https://go.dev/play/p/aevTMYQlkPC)
 ```Go
 package main
 
 import (
 	"fmt"
 	"log"
+
 	"github.com/MoraGames/dice"
 )
 
@@ -80,10 +83,10 @@ func main() {
 		log.Panic(err)
 	}
 	//d3a is a 6-sided dice with faces valued ["1", "2", "3", "4", "5", "6"].
-	
+
 	//Create a custom n-sides dice and their respective values
 	sidesValue1 := []string{"Apple", "Banana", "Cherry", "Dates", "Elderberry"}
-	d3b, err := dice.NewCustomDice(sidesValue1)
+	d3b, err := dice.NewCustomDice(sidesValue1...)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -91,18 +94,18 @@ func main() {
 
 	//Create a custom n-sides dice and their respective values
 	sidesValue2 := []string{"-1", "0", "1"}
-	d3c, err := dice.NewCustomDice(sidesValue2)
+	d3c, err := dice.NewCustomDice(sidesValue2...)
 	if err != nil {
 		log.Panic(err)
 	}
-	//d3b is a 5-sided dice with faces valued ["Apple", "Banana", "Cherry", "Dates", "Elderberry"]
-	
+	//d3c is a 3-sided dice with faces valued ["-1", "0", "1"]
+
 	//Create a custom set of n-dices
 	s1, err := dice.NewSet(d3a, d3b, d3c)
 	if err != nil {
 		log.Panic(err)
 	}
-	
+
 	//Roll all the dices in the set
 	result := s1.Throw()
 	fmt.Println("The result of rolling the set s1 is:", result)
