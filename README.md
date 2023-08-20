@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("The result of rolling the dice d1 is:", result)
 }
 ```
-**2. Roll a custom dice:** [GoPlayground](https://go.dev/play/p/hQuIIR0JxEe)
+**2. Roll a custom dice:** [GoPlayground](https://go.dev/play/p/CoWKl382p2O)
 ```Go
 package main
 
@@ -53,7 +53,7 @@ import (
 func main() {
 	//Create a custom n-sides dice and their respective values
 	sidesValue := []string{"Apple", "Banana", "Cherry", "Dates", "Elderberry"}
-	d2, err := dice.NewCustomDice(sidesValue)
+	d2, err := dice.NewCustomDice(sidesValue...)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -64,7 +64,7 @@ func main() {
 	fmt.Println("The result of rolling the dice d2 is:", result)
 }
 ```
-**3. Roll a set of dices:** [GoPlayground](https://go.dev/play/p/aevTMYQlkPC)
+**3. Roll a set of dices:** [GoPlayground](https://go.dev/play/p/0KeDyKLMLXJ)
 ```Go
 package main
 
