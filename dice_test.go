@@ -22,19 +22,19 @@ func TestNewDice(t *testing.T) {
 }
 
 func TestNewRangeDice(t *testing.T) {
-	// Try with a lowestSide value greater than highestSide value (shoud be rejected)
+	// Try with a lowestSide value greater than highestSide value (should be rejected)
 	d1, err := NewRangeDice(3, 2)
 	if err == nil {
 		t.Fail()
 	}
-	t.Logf("NewDice() = %+v, %v\n", d1, err)
+	t.Logf("NewRangeDice() = %+v, %v\n", d1, err)
 
-	// Try with a lowestSide value smaller than highestSide value (shoud be accepted)
+	// Try with a lowestSide value smaller than highestSide value (should be accepted)
 	d2, err := NewRangeDice(-1, 1)
 	if err != nil {
 		t.Fail()
 	}
-	t.Logf("NewDice() = %+v, %v\n", d2, err)
+	t.Logf("NewRangeDice() = %+v, %v\n", d2, err)
 }
 
 func TestNewCustomDice(t *testing.T) {
@@ -51,7 +51,7 @@ func TestNewCustomDice(t *testing.T) {
 	if err == nil {
 		t.Fail()
 	}
-	t.Logf("NewDice() = %+v, %v\n", d1, err)
+	t.Logf("NewCustomDice() = %+v, %v\n", d1, err)
 
 	// Try with a greater than the minimum number of sides (should be accepted)
 	var validSides []Side
@@ -66,7 +66,7 @@ func TestNewCustomDice(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
-	t.Logf("NewDice() = %+v, %v\n", d2, err)
+	t.Logf("NewCustomDice() = %+v, %v\n", d2, err)
 
 	//Try with a custom struct data type (should be accepted)
 	type TempSide struct {
@@ -86,5 +86,5 @@ func TestNewCustomDice(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
-	t.Logf("NewDice() = %+v, %v\n", d3, err)
+	t.Logf("NewCustomDice() = %+v, %v\n", d3, err)
 }
