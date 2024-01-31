@@ -8,6 +8,24 @@ import (
 
 const minimumSides int = 2
 
+var defaultSides int = 6
+
+func GetMinimumSides() int {
+	return minimumSides
+}
+
+func GetDefaultSides() int {
+	return defaultSides
+}
+
+func SetDefaultSides(numberSides int) error {
+	if numberSides < minimumSides {
+		return fmt.Errorf("the number of sides (%d) must be greater than or equal to %d", numberSides, minimumSides)
+	}
+	defaultSides = numberSides
+	return nil
+}
+
 type (
 	Side any
 	Dice struct {

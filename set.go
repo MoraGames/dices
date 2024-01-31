@@ -4,6 +4,24 @@ import "fmt"
 
 const minimumDices int = 1
 
+var defaultDices int = 2
+
+func GetMinimumDices() int {
+	return minimumDices
+}
+
+func GetDefaultDices() int {
+	return defaultDices
+}
+
+func SetDefaultDices(numberDices int) error {
+	if numberDices < minimumDices {
+		return fmt.Errorf("the number of dices (%d) must be greater than or equal to %d", numberDices, minimumDices)
+	}
+	defaultDices = numberDices
+	return nil
+}
+
 type Set struct {
 	dices []*Dice
 }
