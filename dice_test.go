@@ -21,6 +21,22 @@ func TestNewDice(t *testing.T) {
 	t.Logf("NewDice() = %+v, %v\n", d2, err)
 }
 
+func TestNewRangeDice(t *testing.T) {
+	// Try with a lowestSide value greater than highestSide value (shoud be rejected)
+	d1, err := NewRangeDice(3, 2)
+	if err == nil {
+		t.Fail()
+	}
+	t.Logf("NewDice() = %+v, %v\n", d1, err)
+
+	// Try with a lowestSide value smaller than highestSide value (shoud be accepted)
+	d2, err := NewRangeDice(-1, 1)
+	if err != nil {
+		t.Fail()
+	}
+	t.Logf("NewDice() = %+v, %v\n", d2, err)
+}
+
 func TestNewCustomDice(t *testing.T) {
 	// Try with a less than the minimum number of sides (should be rejected)
 	var invalidSides []Side
