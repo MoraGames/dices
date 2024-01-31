@@ -47,6 +47,17 @@ func NewDice(sidesNumber int) (*Dice, error) {
 	return &Dice{rand.New(rand.NewSource(time.Now().UnixNano())), sidesNumber, sidesValue}, nil
 }
 
+func NewRangeDice(lowestSide, highestSide int) (*Dice, error) {
+	if lowestSide >= highestSide {
+		return nil, fmt.Errorf("the lowestSide (%d) must be less than highestSide (%d)", lowestSide, highestSide)
+	}
+	var sidesValue []Side
+	for s := lowestSide; s <= highestSide; s++ {
+		sidesValue = append(sidesValue, s)
+	}
+	return &Dice{rand.New(rand.NewSource(time.Now().UnixNano())), len(sidesValue), sidesValue}, nil
+}
+
 func NewCustomDice(sidesValue ...Side) (*Dice, error) {
 	if len(sidesValue) < minimumSides {
 		return nil, fmt.Errorf("the number of sides (%d) must be greater than or equal to %d", len(sidesValue), minimumSides)
