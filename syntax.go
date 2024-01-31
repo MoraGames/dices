@@ -17,16 +17,15 @@ TODO:
 */
 
 func NewSyntaxSet(syntax string) (*Set, error) {
+	// Create, compile the regular expression and check if the syntax matches
 	reg := regexp.MustCompile(`^([0-9]*)?d(([0-9]*)|(\[(\-|\+)?[0-9]+\,(\-|\+)?[0-9]+\])|(\{\N+(\,\N+)*\}))$`)
 	if !reg.MatchString(syntax) {
 		return nil, fmt.Errorf("the set of dices indicated is not supported by creation via syntax")
 	}
-
-	var numberDices int
-	var sides []Side
 	splittedSyntax := strings.Split(syntax, "d")
 
 	// Check if the number of dices is a valid value or not indicated (in this last case use default value)
+	var numberDices int
 	if splittedSyntax[0] == "" {
 		numberDices = defaultDices
 	} else {
@@ -40,51 +39,34 @@ func NewSyntaxSet(syntax string) (*Set, error) {
 		}
 	}
 
-	// Check if the number of sides is a valid value or not indicated (in this last case use default value)
-	if splittedSyntax[1] == "" {
-		for s := 1; s <= defaultSides; s++ {
+	// Check if the number of sides is indicated as a number, a range, a list, or is not indicated (in this last case use default value)
+	var sides []Side
+	if splittedSyntax[1] != "" {
+		// S (sides number)
+		var err error
+		sides, err = getNumberSides(splittedSyntax[1])
+		if err != nil {
+			return nil, err
+		}
+	} else if strings.Contains(splittedSyntax[1], "[") {
+		// [MIN-MAX]
+		var err error
+		sides, err = getRangeSides(strings.Split(strings.Trim(splittedSyntax[1], "[]"), ","))
+		if err != nil {
+			return nil, err
+		}
+	} else if strings.Contains(splittedSyntax[1], "{") {
+		// {SIDES}
+		for _, s := range strings.Split(strings.Trim(splittedSyntax[1], "{}"), ",") {
 			sides = append(sides, s)
 		}
 	} else {
-		if strings.Contains(splittedSyntax[1], "[") {
-			// [MIN-MAX]
-			sidesSyntax := strings.Split(strings.Trim(splittedSyntax[1], "[]"), ",")
-			if len(sidesSyntax) != 2 {
-				return nil, fmt.Errorf("the number of sides indicated is not supported by creation via syntax")
-			}
-			lowestSide, err := strconv.Atoi(sidesSyntax[0])
-			if err != nil {
-				return nil, err
-			}
-			highestSide, err := strconv.Atoi(sidesSyntax[1])
-			if err != nil {
-				return nil, err
-			}
-			if lowestSide >= highestSide {
-				return nil, fmt.Errorf("the lowestSide (%d) must be less than highestSide (%d)", lowestSide, highestSide)
-			}
-
-			for s := lowestSide; s <= highestSide; s++ {
-				sides = append(sides, s)
-			}
-		} else if strings.ContainsAny(splittedSyntax[1], "{") {
-			// {SIDES}
-			sidesSyntax := strings.Split(strings.Trim(splittedSyntax[1], "{}"), ",")
-			for _, s := range sidesSyntax {
-				sides = append(sides, s)
-			}
-		} else {
-			// S (sides number)
-			numberSides, err := strconv.Atoi(splittedSyntax[1])
-			if err != nil {
-				return nil, err
-			}
-			for s := 1; s <= numberSides; s++ {
-				sides = append(sides, s)
-			}
+		for s := 1; s <= defaultSides; s++ {
+			sides = append(sides, s)
 		}
 	}
 
+	// Create the set of dices
 	var dices []*Dice
 	for i := 0; i < numberDices; i++ {
 		d, err := NewCustomDice(sides)
@@ -94,4 +76,40 @@ func NewSyntaxSet(syntax string) (*Set, error) {
 		dices = append(dices, d)
 	}
 	return &Set{dices}, nil
+}
+
+func getRangeSides(sidesSyntax []string) ([]Side, error) {
+	if len(sidesSyntax) != 2 {
+		return nil, fmt.Errorf("the number of sides indicated is not supported by creation via syntax")
+	}
+	lowestSide, err := strconv.Atoi(sidesSyntax[0])
+	if err != nil {
+		return nil, err
+	}
+	highestSide, err := strconv.Atoi(sidesSyntax[1])
+	if err != nil {
+		return nil, err
+	}
+	if lowestSide >= highestSide {
+		return nil, fmt.Errorf("the lowestSide (%d) must be less than highestSide (%d)", lowestSide, highestSide)
+	}
+
+	var sides []Side
+	for s := lowestSide; s <= highestSide; s++ {
+		sides = append(sides, s)
+	}
+	return sides, nil
+}
+
+func getNumberSides(sidesSyntax string) ([]Side, error) {
+	numberSides, err := strconv.Atoi(sidesSyntax)
+	if err != nil {
+		return nil, err
+	}
+
+	var sides []Side
+	for s := 1; s <= numberSides; s++ {
+		sides = append(sides, s)
+	}
+	return sides, nil
 }
