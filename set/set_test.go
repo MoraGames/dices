@@ -1,14 +1,17 @@
-package dices
+package set
 
 import (
 	"testing"
+
+	"github.com/MoraGames/dices"
+	"github.com/MoraGames/dices/standardDice"
 )
 
 func TestNewSet(t *testing.T) {
 	// Try with a less than the minimum number of dices (should be rejected)
-	var invalidDices []*Dice
+	var invalidDices []dices.Dice
 	for i := 0; i < minimumDices-1; i++ {
-		d, err := NewDice(minimumDices + 1)
+		d, err := standardDice.NewDice(minimumDices + 1)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -25,9 +28,9 @@ func TestNewSet(t *testing.T) {
 	t.Logf("NewSet() = %+v, %v\n", s1, err)
 
 	// Try with a greater than the minimum number of dices (should be accepted)
-	var validDices []*Dice
+	var validDices []dices.Dice
 	for i := 0; i < minimumDices+1; i++ {
-		d, err := NewDice(minimumDices + 1)
+		d, err := standardDice.NewDice(minimumDices + 1)
 		if err != nil {
 			t.Fatal(err)
 		}
