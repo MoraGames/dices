@@ -22,13 +22,13 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/MoraGames/dices"
+	"github.com/MoraGames/dices/standardDice"
 )
 
 func main() {
 	//Create a standard n-sides dice
 	sidesNumber := 6
-	d1, err := dices.NewDice(sidesNumber)
+	d1, err := standardDice.NewDice(sidesNumber)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -48,12 +48,17 @@ import (
 	"log"
 
 	"github.com/MoraGames/dices"
+	"github.com/MoraGames/dices/standardDice"
 )
 
 func main() {
 	//Create a special ranged dice
 	lowestSide, highestSide := -1, 1
-	d2, err := dices.NewRangeDice(lowestSide, highestSide)
+	r1, err := dices.NewRange(lowestSide, highestSide)
+	if err != nil {
+		log.Panic(err)
+	}
+	d2, err := standardDice.NewRangeDice(r1)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -73,12 +78,19 @@ import (
 	"log"
 
 	"github.com/MoraGames/dices"
+	"github.com/MoraGames/dices/standardDice"
 )
 
 func main() {
 	//Create a custom n-sides dice and their respective values
-	sidesValue := []dices.Side{"Apple", "Banana", "Cherry", "Dates", "Elderberry"}
-	d3, err := dices.NewCustomDice(sidesValue...)
+	sidesValue := []dices.Side{
+		standardDice.NewStandardSide("Apple"),
+		standardDice.NewStandardSide("Banana"),
+		standardDice.NewStandardSide("Cherry"),
+		standardDice.NewStandardSide("Dates"),
+		standardDice.NewStandardSide("Elderberry"),
+	}
+	d3, err := standardDice.NewCustomDice(sidesValue...)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -98,12 +110,14 @@ import (
 	"log"
 
 	"github.com/MoraGames/dices"
+	"github.com/MoraGames/dices/set"
+	"github.com/MoraGames/dices/standardDice"
 )
 
 func main() {
 	//Create a standard n-sides dice
 	sidesNumber := 6
-	d4a, err := dices.NewDice(sidesNumber)
+	d4a, err := standardDice.NewDice(sidesNumber)
 	if err != nil {
 		log.Panic(err)
 	}
@@ -111,15 +125,25 @@ func main() {
 
 	//Create a special ranged dice
 	lowestSide, highestSide := -1, 1
-	d4b, err := dices.NewRangeDice(lowestSide, highestSide)
+	r2, err := dices.NewRange(lowestSide, highestSide)
+	if err != nil {
+		log.Panic(err)
+	}
+	d4b, err := standardDice.NewRangeDice(r2)
 	if err != nil {
 		log.Panic(err)
 	}
 	//d4b is a 3-sided dice with faces valued [-1, 0, 1]
 
 	//Create a custom n-sides dice and their respective values
-	sidesValue1 := []dices.Side{"Apple", "Banana", "Cherry", "Dates", "Elderberry"}
-	d4c, err := dices.NewCustomDice(sidesValue1...)
+	sidesValue := []dices.Side{
+		standardDice.NewStandardSide("Apple"),
+		standardDice.NewStandardSide("Banana"),
+		standardDice.NewStandardSide("Cherry"),
+		standardDice.NewStandardSide("Dates"),
+		standardDice.NewStandardSide("Elderberry"),
+	}
+	d4c, err := standardDice.NewCustomDice(sidesValue...)
 	if err != nil {
 		log.Panic(err)
 	}
